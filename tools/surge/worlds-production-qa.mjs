@@ -1,5 +1,5 @@
 import {chromium} from 'playwright';import {mkdir,writeFile} from 'node:fs/promises';
-const out='artifacts/surge-worlds/production';await mkdir(out,{recursive:true});const browser=await chromium.launch({headless:true,executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'});const page=await browser.newPage({viewport:{width:1440,height:900}});const report={checks:[],errors:[],failedResources:[]};
+const out=process.env.SURGE_QA_OUT??'artifacts/surge-worlds/production';await mkdir(out,{recursive:true});const browser=await chromium.launch({headless:true,executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'});const page=await browser.newPage({viewport:{width:1440,height:900}});const report={checks:[],errors:[],failedResources:[]};
 page.on('pageerror',e=>report.errors.push(String(e)));page.on('response',r=>{if(r.status()>=400)report.failedResources.push(r.url());});
 const check=(name,pass,data)=>{report.checks.push({name,pass,data});if(!pass)throw new Error(name);};
 const saved=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('oinja.surge.run.v2')));

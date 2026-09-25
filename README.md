@@ -4,7 +4,9 @@
 
 ## 开始游戏
 
-当前本地地址：<http://127.0.0.1:4180/>。也可双击本目录「开始游戏.command」。桌面键鼠游玩，建议横向宽窗口。
+线上游玩：[oinja-game.vercel.app](https://oinja-game.vercel.app)。无需安装，建议电脑键鼠、横向宽窗口。
+
+源码仓库：[Olivia295/Oinja-game](https://github.com/Olivia295/Oinja-game)（私有）。本机仍可在 <http://127.0.0.1:4180/> 游玩，或双击本地「开始游戏.command」。
 
 - WASD / 方向键：移动；空格：闪避。
 - Q：同调爆发，能量满后释放，强化当前构筑。
@@ -74,3 +76,18 @@ npm run preview -- --port 4180
 验证脚本位于 `tools/surge/`，报告与截图在 `artifacts/surge*`。检查包含新版规则测试、真实物理地图通行、六类流派完整模拟、浏览器界面/保存恢复/图形恢复与压力测试。
 
 自动模拟与功能通过不等同真人通关率或乐趣已被充分验证。本轮修复了地面接触、坡缘卡住、攻击抢朝向及首次特效编译/重复索敌造成的停顿。当前面向桌面浏览器；Safari 与手机触屏操作不在已验证范围内。
+
+## 线上发布
+
+2026-09-25 已部署至 Vercel 的 `olivia295s-projects/oinja-game`。采用手动部署，推送 GitHub 不会自动更新线上版本。已有 Vercel 登录与项目连接时，在本目录执行：
+
+```sh
+npm ci
+npm test
+npm run build
+npx vercel deploy --prod --yes
+```
+
+`.vercelignore` 限定上传构建代码与运行资源，排除本机缓存、记录、原始建模文件及不再使用的旧环境模型；这些本地文件仍保留。`.gitignore` 排除密钥、本地配置和生成产物。
+
+本次验证：151 项测试通过，正式构建通过；在线上公开网址运行的 12 项浏览器检查均通过，包括双地图、设施奖励、中英切换、刷新后继续、Oinja 宇宙跳转。9 个运行模型均返回 HTTP 200，内部文档及环境配置路径返回 404，无页面异常或缺失资源。验证记录保存在本地 `artifacts/deployment-2026-09-25/`，不上传 GitHub 或 Vercel。
