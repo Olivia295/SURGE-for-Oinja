@@ -1,0 +1,33 @@
+import {chromium} from 'playwright';
+import {mkdir,writeFile,readFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {fileURLToPath} from 'node:url';
+const root=fileURLToPath(new URL('../../',import.meta.url)),label=process.argv[2]??'baseline',out=root+'artifacts/surge-movement';await mkdir(out,{recursive:true});
+const paths=['src/surge/main.ts','src/surge/renderer.ts','src/surge/save.ts','src/surge/simulation.ts','src/physics/world.ts','src/surge/world-navigation.ts'];
+const hashes=async()=>Object.fromEntries(await Promise.all(paths.map(async p=>[p,createHash('sha256').update(await readFile(root+p)).digest('hex')])));
+const report={label,date:new Date().toISOString(),sourceBefore:await hashes(),scope:'45 seconds of ordinary movement and natural combat through the real main loop; automatic first-choice upgrades and square keyboard route; no injected enemies, invulnerability, disabled attacks or accelerated simulation.',errors:[]};
+const browser=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true,args:['--enable-precise-memory-info','--disable-background-timer-throttling','--disable-renderer-backgrounding']});
+const page=await browser.newPage({viewport:{width:1920,height:1080},deviceScaleFactor:1});page.on('pageerror',e=>report.errors.push(String(e)));page.on('console',m=>{if(m.type()==='error')report.errors.push(m.text());});
+try{
+ await page.goto('http://127.0.0.1:4175/');await page.waitForFunction(()=>window.__SURGE__?.world&&window.__SURGE__?.renderer,{timeout:60000});
+ await page.evaluate(async()=>{const a=window.__SURGE__;a.profile.settings={...a.profile.settings,quality:'medium',volume:0,shake:false,cameraDistance:26};a.renderer.applySettings(a.profile.settings);const now=Date.now;Date.now=()=>1789651200000;try{await a.start('fist',0,'balanced');}finally{Date.now=now;}});
+ const cdp=await page.context().newCDPSession(page);await cdp.send('Profiler.enable');await cdp.send('Profiler.start');
+ report.sample=await page.evaluate(async()=>{
+  const api=window.__SURGE__,start=performance.now(),samples=[],timings={},calls=[],turns=[],longTasks=[];let frameCalls=[],active=true,previous=start,oldPos={...api.sim.s.player},oldYaw=api.sim.s.yaw,previousHero={...api.renderer.hero.root.position},oldHeld='',chosen=0;
+  const stats=arr=>{if(!arr.length)return{count:0};const sorted=[...arr].sort((a,b)=>a-b);return{count:arr.length,mean:arr.reduce((a,b)=>a+b,0)/arr.length,p95:sorted[Math.floor(arr.length*.95)],p99:sorted[Math.floor(arr.length*.99)],max:sorted.at(-1)};};
+  const wrap=(obj,key,name=key)=>{if(typeof obj[key]!=='function')return;const fn=obj[key];obj[key]=function(...args){const before=performance.now();try{return fn.apply(this,args);}finally{if(active){const ms=performance.now()-before;(timings[name]??=[]).push(ms);if(ms>1)frameCalls.push({name,ms});}}};};
+  for(const name of ['step','snapshot','cast'])wrap(api.sim,name,'sim.'+name);
+  for(const name of ['render','follow','drawHero','drawEnemies','fadeOcclusion','drawLabels','drawEffects','drawMachines'])wrap(api.renderer,name,'render.'+name);
+  wrap(api.renderer.renderer,'render','webgl.render');wrap(api.ui,'hud','ui.hud');wrap(api.physics,'syncShortcuts','physics.syncShortcuts');wrap(api.physics,'move','physics.move');wrap(api.physics,'route','physics.route');
+  wrap(Storage.prototype,'setItem','storage.setItem');wrap(JSON,'stringify','JSON.stringify');wrap(JSON,'parse','JSON.parse');
+  const cast=api.sim.cast;api.sim.cast=function(...args){const before=this.s.yaw;const result=cast.apply(this,args);const angle=Math.atan2(Math.sin(this.s.yaw-before),Math.cos(this.s.yaw-before));if(Math.abs(angle)>.15)turns.push({at:this.s.time,radians:angle,weapon:args[0]?.id});return result;};
+  let observer;try{observer=new PerformanceObserver(list=>{for(const e of list.getEntries())longTasks.push({start:e.startTime-start,duration:e.duration});});observer.observe({type:'longtask',buffered:false});}catch{}
+  const keys=['KeyD','KeyW','KeyA','KeyS'];const hold=key=>{if(oldHeld===key)return;if(oldHeld)dispatchEvent(new KeyboardEvent('keyup',{code:oldHeld,bubbles:true}));oldHeld=key;if(key)dispatchEvent(new KeyboardEvent('keydown',{code:key,bubbles:true}));};
+  await new Promise(resolve=>{function tick(now){const s=api.sim.s,elapsed=now-start;if(s.phase==='upgrade'){const c=s.choices.find(c=>c.type==='rank'||c.type==='evolution')??s.choices[0];if(c){api.sim.choose(c.id,s.weapons.length===4?0:undefined);api.syncUI();api.save();chosen++;oldHeld='';}}
+    hold(s.phase==='playing'?keys[Math.floor(elapsed/1250)%4]:'');const p=s.player,h=api.renderer.hero.root.position,dp=Math.hypot(p.x-oldPos.x,p.z-oldPos.z),dh=Math.hypot(h.x-previousHero.x,h.z-previousHero.z),dyaw=Math.abs(Math.atan2(Math.sin(s.yaw-oldYaw),Math.cos(s.yaw-oldYaw)));
+    samples.push({at:elapsed,frameMs:now-previous,time:s.time,phase:s.phase,x:p.x,y:p.y,z:p.z,dp,heroDelta:dh,yawDelta:dyaw,clip:api.renderer.hero.clip,enemies:s.enemies.length,kills:s.kills,calls:frameCalls});frameCalls=[];oldPos={...p};previousHero={x:h.x,y:h.y,z:h.z};oldYaw=s.yaw;previous=now;
+    if(elapsed<45000&&s.phase!=='lost'&&s.phase!=='won')requestAnimationFrame(tick);else{hold('');resolve();}}
+    requestAnimationFrame(tick);});active=false;observer?.disconnect();const s=api.sim.s,r=api.renderer.renderer,gl=r.getContext(),ext=gl.getExtension('WEBGL_debug_renderer_info');return{seconds:(performance.now()-start)/1000,environment:{renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):null,dpr:r.getPixelRatio()},summary:{frames:stats(samples.slice(1).map(f=>f.frameMs)),phase:s.phase,time:s.time,kills:s.kills,level:s.level,choices:chosen,damageTaken:s.damageTaken,zeroDisplacementFrames:samples.filter(f=>f.phase==='playing'&&f.dp<.001).length,largeYawFrames:samples.filter(f=>f.yawDelta>.8).length},timings:Object.fromEntries(Object.entries(timings).map(([k,v])=>[k,stats(v)])),turns,longTasks,samples};
+ });
+ const profile=await cdp.send('Profiler.stop');await writeFile(out+'/'+label+'.cpuprofile',JSON.stringify(profile.profile));await page.screenshot({path:out+'/'+label+'.png'});report.sourceAfter=await hashes();report.sourceStable=JSON.stringify(report.sourceBefore)===JSON.stringify(report.sourceAfter);console.log(JSON.stringify({label,sourceStable:report.sourceStable,summary:report.sample.summary,timings:report.sample.timings,turns:report.sample.turns.length,longTasks:report.sample.longTasks,errors:report.errors},null,2));
+}catch(e){report.failure=String(e);process.exitCode=1;console.error(e);}finally{await writeFile(out+'/'+label+'.json',JSON.stringify(report,null,2));await browser.close();}

@@ -1,0 +1,15 @@
+import {chromium} from 'playwright';
+import {mkdir,writeFile} from 'node:fs/promises';
+const out='artifacts/playtest';await mkdir(out,{recursive:true});
+const browser=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true,args:['--disable-background-timer-throttling','--disable-renderer-backgrounding','--enable-webgl','--ignore-gpu-blocklist']});
+const page=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFactor:1});
+const errors=[];page.on('pageerror',e=>errors.push(String(e)));page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
+await page.goto('http://127.0.0.1:4175/');await page.waitForFunction(()=>window.__OINJA__?.world!==null&&document.querySelector('[data-action="start"]'),{timeout:30000}).catch(()=>{});
+await page.waitForTimeout(1500);await page.screenshot({path:out+'/01-menu.png'});
+console.log(await page.locator('button').allTextContents());
+console.log(await page.evaluate(()=>({diag:window.__OINJA__?.inspect(),body:document.body.innerText})));
+await page.evaluate(()=>window.__OINJA__.start({mode:'thunder'}));await page.waitForTimeout(1200);
+await page.evaluate(()=>window.__OINJA__.resume());await page.keyboard.down('KeyW');await page.waitForTimeout(1700);await page.keyboard.up('KeyW');
+await page.screenshot({path:out+'/02-game.png'});
+console.log('After movement',await page.evaluate(()=>window.__OINJA__.inspect()));console.log({errors});
+await writeFile(out+'/smoke.json',JSON.stringify({errors},null,2));await browser.close();

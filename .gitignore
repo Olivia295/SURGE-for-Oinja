@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.cache/
+artifacts/browser-profile/
+*.log
+.DS_Store
+
+# Local work and generated evidence
+artifacts/
+art/
+archive/
+.vercel/
+.env
+.env.*
+__pycache__/
+*.pyc
+开始游戏.command

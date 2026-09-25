@@ -1,0 +1,5 @@
+import {chromium} from 'playwright';import {mkdir} from 'node:fs/promises';
+const out='artifacts/surge-worlds/views';await mkdir(out,{recursive:true});const browser=await chromium.launch({headless:true,executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'});const page=await browser.newPage({viewport:{width:1440,height:900}});
+try{await page.goto('http://127.0.0.1:4175/');await page.locator('[data-act="start"]').waitFor({timeout:60000});await page.evaluate(async()=>{await window.__SURGE__.start('fist',0,'balanced',undefined,'tidal-observatory');});
+for(const [id,x,y,z] of [['arrival',0,0,56],['greenhouse',-62,0,-29],['observatory',0,0,-46],['antenna',60,0,-48],['upper-ring',0,5,28],['water-garden',64,0,40]]){await page.evaluate(({x,y,z})=>{const a=window.__SURGE__,s=a.sim.s;s.phase='paused';s.player={x,y,z};s.enemies=[];s.shots=[];s.fx=[];a.renderer.clear();a.ui.game();a.ui.hud(s,a.world.zones.reduce((a,b)=>Math.hypot(a.center[0]-x,a.center[2]-z)<Math.hypot(b.center[0]-x,b.center[2]-z)?a:b).name);},{x,y,z});await page.waitForTimeout(250);await page.screenshot({path:out+'/'+id+'.png'});}
+}finally{await browser.close();}

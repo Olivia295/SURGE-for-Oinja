@@ -1,0 +1,72 @@
+{
+  "record_type": "readonly_source_snapshot",
+  "recorded_date": "2026-09-17",
+  "project_directory": "/Users/oliviapan/Desktop/Oinja-game",
+  "note": "Sources were read for the design blueprint. Hashes record the observed files, not approval of newly designed game content. No source assets were modified.",
+  "files": [
+    {
+      "path": "/Users/oliviapan/Desktop/Oinja/README.md",
+      "sha256": "17129d8cd7ab5a4239a14cd5f28e601b0695250e088f2793bb07d788818106bd"
+    },
+    {
+      "path": "/Users/oliviapan/Desktop/Oinja/DIRECTORY_GUIDE.md",
+      "sha256": "9bf6c20a9ac4fe8e1b3ed206cbc9b84085ee3045bc2f5f0cda775d5661836a44"
+    },
+    {
+      "path": "/Users/oliviapan/Desktop/Oinja/base_setting/identity.md",
+      "sha256": "285403adb61428e40d78be4c23b8fa97d75a0424bfc45341e664bd0338edc69d"
+    },
+    {
+      "path": "/Users/oliviapan/Desktop/Oinja/base_setting/abilities.md",
+      "sha256": "6307e8833b4aa83466c1e2f91c7dda83902e44eba20f92c98000b0deb2e6512f"
+    },
+    {
+      "path": "/Users/oliviapan/Desktop/Oinja/base_setting/world.md",
+      "sha256": "a6b42056e12c08d5f5daedc3b1ccddef407e0dc8e551fd597c68f43ad3a1fb98"
+    },
+    {
+      "path": "/Users/oliviapan/Desktop/Oinja/advanced_setting/abilities.md",
+      "sha256": "0fce21f2704da81c934e2741b7404ba24fd9222524c7c8eeac32c7db770e4e33"
+    },
+    {
+      "path": "/Users/oliviapan/Desktop/Oinja/advanced_setting/abilities_upgrade.md",
+      "sha256": "1eb820d4a70e15541c5e69c8439b2aef2490e6428e3689826b2e949aa265dcf5"
+    },
+    {
+      "path": "/Users/oliviapan/Desktop/Oinja/LOCK_en.md",
+      "sha256": "ed6cb998a9b65c9ccbd41723b1edc4e1c089ceed1bad5dfea9bb2f16f4795ea7"
+    },
+    {
+      "path": "/Users/oliviapan/Desktop/Oinja/LOCK_zh.md",
+      "sha256": "336c752df0ce10111e383bf47456cba932bdd70af5472e2e40f199f54293010d"
+    },
+    {
+      "path": "/Users/oliviapan/Desktop/Oinja/canon.yaml",
+      "sha256": "757ed08182cf6e92ce32e68e5f7f493fa9ff6a72048c26d22b3cf66e6d003f1b"
+    },
+    {
+      "path": "/Users/oliviapan/Desktop/Oinja/canon/approval.json",
+      "sha256": "aeb685dce23e95adeead78d248dcc28e70ce70512d817d807d7747a8855a4188"
+    },
+    {
+      "path": "/Users/oliviapan/Desktop/Oinja/canon/body_front.png",
+      "sha256": "b9006d921a4f400c38e53ca09929048fcbca2e71e02f5c910a1d422f1b748e4e"
+    },
+    {
+      "path": "/Users/oliviapan/Desktop/Oinja/canon/body_left.png",
+      "sha256": "63788e9a3f877148df92c9122166deef2e28477d376e4b946bb5d495c4c49148"
+    },
+    {
+      "path": "/Users/oliviapan/Desktop/Oinja/canon/body_right.png",
+      "sha256": "6afaeb5ed79a07e66ee4c05f100408278a79d95e065efb5e581fa112222d0787"
+    },
+    {
+      "path": "/Users/oliviapan/Desktop/Oinja/canon/body_back.png",
+      "sha256": "5f147e087af7d4dba477e27e1e4df7cbfe628f8cf6756a5760833078f9af49c8"
+    },
+    {
+      "path": "/Users/oliviapan/Desktop/Oinja/models/README.md",
+      "sha256": "4771f8c3bd63dfc556c94f95baed0c4d57606e6e3cffed0210e6f15bd92fbb90"
+    }
+  ]
+}
