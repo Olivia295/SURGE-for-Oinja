@@ -1,93 +1,119 @@
-# Oinja · 电涌 / SURGE · 0.4
+<div align="center">
+  <img src="public/favicon.svg" alt="SURGE lightning emblem" width="56" height="56" />
+  <h1>SURGE for Oinja</h1>
+  <p><strong>Into the swarm. Beyond the limit.</strong></p>
+  <p>A third-person survival game set in the Oinja universe.<br />Build electrical combos, take on mechanical swarms, and keep the circuit alive.</p>
+  <p><a href="https://oinja-game.vercel.app"><strong>Play in your browser ↗</strong></a> · <a href="https://oinja-website.vercel.app">Explore the Oinja universe ↗</a></p>
+  <p><strong>English</strong> · <a href="README.zh-CN.md">简体中文</a></p>
+</div>
 
-浏览器直接游玩的第三人称 3D 幸存者游戏。以自动清怪、双臂联动、局内构筑、双地图设施与随机遭遇为核心。
+[![The SURGE game menu, starting abilities, and Old Harbor Workshop](public/preview.jpg)](https://oinja-game.vercel.app)
 
-## 开始游戏
+> [!NOTE]
+> Made for a desktop browser and keyboard. No installation or account is needed to play. Mobile touch controls are not supported.
 
-线上游玩：[oinja-game.vercel.app](https://oinja-game.vercel.app)。无需安装，建议电脑键鼠、横向宽窗口。
+## Make the build your own
 
-源码仓库：[Olivia295/Oinja-game](https://github.com/Olivia295/Oinja-game)（私有）。本机仍可在 <http://127.0.0.1:4180/> 游玩，或双击本地「开始游戏.command」。
+Start with any of **eight abilities**. Fill **four ability slots**, add an independent **support companion or weapon**, and turn individual attacks into a connected build.
 
-- WASD / 方向键：移动；空格：闪避。
-- Q：同调爆发，能量满后释放，强化当前构筑。
-- E：操作附近同层设施，或接取可选随机事件。
-- 1 / 2 / 3：升级选卡；R：重抽。
-- Tab / M：地图；Esc：暂停。地图和升级界面暂停战斗。
+- **Abilities that work together.** Pull enemies into Shock Fist, discharge conductive marks with explosions, or use Chain Lightning to energize Volt Mist. Five automatic links change how paired abilities behave.
+- **Choices that change the run.** Two evolution branches per ability, 14 upgrade types, rerolls, and replacements that inherit your investment.
+- **A short survival arc.** Five enemy types, elite encounters, and a boss at 12 minutes. Defeat it before the 15-minute limit. Standard difficulty includes one emergency revival; Danger I and II offer more pressure.
+- **Power beyond your four slots.** Map facilities can unlock support such as Workshop Titan, Critical Tempest, and Orbital Cannon.
 
-每局约 12–15 分钟，第 12 分钟出现终局首领。默认一次满血复起，复起时同调充满。暂停后可保存返回，刷新浏览器可以继续。0.2 / 0.3 的行动记录可继续，等级、技能与选择保留，经验进度按新曲线迁移。
+Attacks fire automatically. Your job is to move, dodge, shape the crowd, choose your upgrades, and time **Sync Burst**.
 
-## 构筑与重玩
+## Two places to survive
 
-4 个常规能力槽 + 1 个独立地图支援槽。满槽时新能力可替换旧能力并继承等级及进化投入。所有八种初始能力首局开放：震荡重拳、跳跃闪电、电泡集束、回震圆盾、蜂群援护、雷雾回路、回旋钩索、重构电炮。
+| Old Harbor Workshop | Tidal Observatory |
+| --- | --- |
+| Alleys, cargo yards, shopfronts, ramps, and passages beneath raised walkways. | Conservatories, water gardens, observation instruments, and an elevated ring connected by broad ramps. |
+| Restore power, open shortcuts, and turn industrial equipment against the swarm. | Circle the courtyards, travel between levels, and use the open routes to gather enemies. |
 
-五条跨能力连携让技能改变彼此的行为：钩索接重拳、导电接爆破、连雷点燃雷雾、圆盾蓄能接反击、机械蜂导电集火。升级会优先提供能补齐连携的搭档；选卡与替换界面明确显示点亮和断开的连携，暂停页显示真实触发次数及伤害。
+Each map has **12 facility locations**, with one of each of six facility types selected per run. Repair stations, escort carts, hoists, conveyors, and guarded caches give you reasons to leave your usual route.
 
-每种能力有两条机制进化。14 类可叠加或一次性改装构成导电、殉爆、回响、聚怪、散射、近身回收等联动。六类流派可以混搭：近战震击、链雷传导、电泡重炮、盾反蓄能、机械召唤、雷雾持续伤害。
+![Tidal Observatory gameplay with a support unit](docs/images/observatory.jpg)
 
-地图支援包括工坊泰坦、临界雷暴、轨道电炮、修复精灵、棱镜浮游炮、磁暴碎星。完成事件时三选一，已拥有支援时可替换，也可保留当前支援并获得整备补给。
+Four optional random encounters add a different decision along the way:
 
-失败也记录解锁进度。局外提供带代价的不同开局方案：更多重抽但降低伤害、自带导电但降低生命、扩展范围但稍慢冷却、限时支援但少一次重抽。默认基础强度不依赖永久属性刷取。危险 I / II 是自选挑战。0.3 标准档小幅加强敌人追击、生命与伤害，稍放缓脱战回复；每 150 秒到第 600 秒出现一组有提前预警的围猎小队。一次复起仍然保留。
+| Encounter | What you do |
+| --- | --- |
+| Magnetic Hunt | Keep a kill streak going inside the marked area. |
+| Battery Run | Reach a sequence of collection points. |
+| Overload Exchange | Trade shields and a little health for a short risk window, then a damage boost. |
+| Fault Echoes | Track down two marked elites before time runs out. |
 
-## 双地图与随机遭遇
+Rewards include healing, shields, Sync charge, and temporary buffs. These encounters do not take up your support slot.
 
-主菜单可选择旧港工坊或潮汐观测庭。地图选择随本局保存；继续和重开不会换错地图。
+## Controls
 
-旧港工坊约 180×180 米，六个区域：折线工坊、雨棚市场、回栈货场、铜线配电庭、桥脊检修道、第七码头。地面多环路、高架两侧坡道、桥下通路、可开货门与落桥可实际通行。
+| Key | Action |
+| --- | --- |
+| **WASD** / **Arrow keys** | Move |
+| **Space** | Dodge |
+| **Q** | Release Sync Burst when charged |
+| **E** | Use a nearby facility or accept an encounter |
+| **1 / 2 / 3** | Pick an upgrade |
+| **R** | Reroll upgrade choices |
+| **Tab** / **M** | Open the map |
+| **Esc** | Pause or return |
 
-潮汐观测庭加入原创白石建筑、铜绿温室、水庭与观测设备，宽缓坡连接完整高架环廊，地面同样有多条清怪绕行路线。
+The map and upgrade screen pause combat. The camera follows automatically.
 
-每张地图各有 12 个候选设施，每局选取六类事件各一个；出生区工坊固定可用，其余位置随机。它们的操作不同：
+## Language and saved runs
 
-- 配电站：附近击破敌人，完成接通并开启对应货门。
-- 接力车：跟随移动设备护送。
-- 吊机：启动大范围清场，对应码头吊机放下检修桥。
-- 工坊：立即修复与充满同调，选择支援。
-- 输送线：聚拢并处理敌群。
-- 储备箱：击破两个守卫；把守卫引远后击破也计入。
+On a first visit, SURGE follows the browser's preferred supported language: **English** or **Simplified Chinese**. Chinese variants use Simplified Chinese; other languages fall back to English. You can change language in the menu or settings, and a manual choice takes priority on later visits.
 
-沿途还会预告四种可选随机遭遇：磁暴猎场、流动电池、过载交换、故障分身。它们分别围绕区域击杀、顺序回收、风险交换和精英追猎设计。完成后立即获得补给与限时增益，不占支援槽；忽略或失败不扣除已有构筑。
+Runs, settings, and unlocks are saved **in the current browser**. Refresh and choose **Continue run** to resume. There is no account or cloud synchronization; clearing browser storage removes that browser's progress.
 
-升级曲线已放缓，连续升级之间留有战斗时间，避免后期反复弹出选卡；经验与待升级次数不会因此丢失。
+## Run locally
 
-## 语言与 Oinja 宇宙
-
-菜单和设置支持中文 / English，语言偏好保存在本机，切换不重开本局。能力、进化、连携、设施、随机事件、设置与结算均提供英语。菜单、暂停和结算页可通过「Oinja 宇宙 / Oinja Universe」访问 [角色与世界档案馆](https://oinja-website.vercel.app)。
-
-五种基础敌人：追击爬机、冲锋机、远程炮机、护卫重装、增殖母机；另有精英与独立行为的断电统御机首领。
-
-## 项目与边界
-
-新版代码在 `src/surge/`，复用 `src/physics/`、原角色/敌人 GLB 与声音系统。原作 Oinja 的右机械、左雷电和视觉身份保留；新技能联动、召唤装置及关卡属于本游戏改编，不修改原作 Canon。环境与新增机械援护使用自主程序化建模，角色和五敌沿用本项目已有 GLB。
-
-旧版源码保存在 `archive/v0.1/`。文档 01–08 记录旧版；0.2 重做记录见 09–13；0.3 行走手感、连携和难度更新见 [14-feel-and-circuits.md](docs/14-feel-and-circuits.md)；0.4 双地图、随机事件、成长曲线和中英支持见 [15-worlds-events-and-language.md](docs/15-worlds-events-and-language.md)。
-
-## 开发与验证
+Requires **Node.js 22** and npm. Repository access is required to clone; the [hosted game](https://oinja-game.vercel.app) is public.
 
 ```sh
-npm --userconfig /dev/null --cache .cache/npm install
+git clone https://github.com/Olivia295/SURGE-for-Oinja.git
+cd SURGE-for-Oinja
+npm ci
 npm run dev
+```
+
+Open the local URL printed by Vite. To check and preview the production build:
+
+```sh
 npm test
 npm run build
 npm run preview -- --port 4180
 ```
 
-需要 Node.js 22 或更新版本。Three.js + TypeScript + Vite + Rapier，游戏状态与渲染分离。正式包没有 `window.__SURGE__` 调试入口。
+`npm run build` includes TypeScript checking. The game uses **Three.js**, **Rapier**, **TypeScript**, and **Vite**; it needs no application server or API keys.
 
-验证脚本位于 `tools/surge/`，报告与截图在 `artifacts/surge*`。检查包含新版规则测试、真实物理地图通行、六类流派完整模拟、浏览器界面/保存恢复/图形恢复与压力测试。
+## Inside the project
 
-自动模拟与功能通过不等同真人通关率或乐趣已被充分验证。本轮修复了地面接触、坡缘卡住、攻击抢朝向及首次特效编译/重复索敌造成的停顿。当前面向桌面浏览器；Safari 与手机触屏操作不在已验证范围内。
+| Path | Purpose |
+| --- | --- |
+| `src/surge/` | Current game: combat, progression, maps, rendering, UI, and translations |
+| `src/physics/` | Rapier movement and collision |
+| `public/assets/` | Game models and assets |
+| `tests/` | Automated rule and regression checks |
+| `tools/surge/` | Browser checks, navigation checks, and scripted playtests |
+| `docs/` | Design and validation notes, primarily in Chinese |
 
-## 线上发布
+Start with the [0.4 design and validation notes](docs/15-worlds-events-and-language.md) or the [Tidal Observatory map notes](docs/observatory-map.md). Early documents describe earlier versions and are not the current feature list. Local archives, raw modelling files, and generated QA evidence are excluded from Git.
 
-2026-09-25 已部署至 Vercel 的 `olivia295s-projects/oinja-game`。采用手动部署，推送 GitHub 不会自动更新线上版本。已有 Vercel 登录与项目连接时，在本目录执行：
+The existing checks cover game rules, navigation, language, and save/restore flows. Desktop Chrome has been tested; automated runs are not a substitute for human balance testing or validation on every browser.
+
+## Publishing
+
+The public address remains **[oinja-game.vercel.app](https://oinja-game.vercel.app)**. Deployment is manual; a GitHub push does not publish the game. From a checkout already linked to the owner's Vercel project:
 
 ```sh
-npm ci
 npm test
 npm run build
 npx vercel deploy --prod --yes
 ```
 
-`.vercelignore` 限定上传构建代码与运行资源，排除本机缓存、记录、原始建模文件及不再使用的旧环境模型；这些本地文件仍保留。`.gitignore` 排除密钥、本地配置和生成产物。
+`vercel.json` contains the build settings. `.vercelignore` excludes local records, internal documents, and unused legacy environments from deployment.
 
-本次验证：151 项测试通过，正式构建通过；在线上公开网址运行的 12 项浏览器检查均通过，包括双地图、设施奖励、中英切换、刷新后继续、Oinja 宇宙跳转。9 个运行模型均返回 HTTP 200，内部文档及环境配置路径返回 404，无页面异常或缺失资源。验证记录保存在本地 `artifacts/deployment-2026-09-25/`，不上传 GitHub 或 Vercel。
+---
+
+**Part of the Oinja universe.** Oinja's mechanical and electrical identity carries into this game. Its combat systems, support machines, and playable maps are adaptations for play, not additions to the original character canon. Discover the character and world in the [Oinja archive](https://oinja-website.vercel.app).

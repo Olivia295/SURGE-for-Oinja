@@ -84,7 +84,7 @@ export class SurgeUI {
     this.shell.addEventListener('click', this.clickHandler);
     this.shell.addEventListener('input', this.changeHandler);
     this.shell.addEventListener('change', this.changeHandler);
-    setLocale(getLocale()); this.applyPreferences();
+    setLocale(getLocale(), false); this.applyPreferences();
   }
 
   get isOverlayOpen(): boolean { return this.view !== 'game'; }
@@ -110,7 +110,7 @@ export class SurgeUI {
       <div class="su-start-row"><button class="su-primary su-start" data-act="start"><span>${esc(t('进入{name}',{name:t(map.name)}))}</span><span aria-hidden="true">↗</span></button>${this.hasSave ? `<button class="su-secondary su-continue" data-act="continue">${t("继续行动 ")}<span>↗</span></button>` : ''}</div>
       <p class="su-input-note"><span class="su-keyboard-icon">⌨</span>${t(" 桌面键鼠游玩 ")}<span>${t("WASD 移动 · 自动攻击")}</span></p></section></div>
       <aside class="su-scene-caption"><span>SECTOR ${this.selectedMap === 'old-harbor' ? '01' : '02'}</span><strong>${t("港灯仍亮着。")}<br>${t("该你上场了。")}</strong><i>${esc(map.description)}</i></aside>
-      <footer class="su-menu-footer"><button data-act="archive">${t("行动档案 ")}<span>${this.profile.unlocks.length.toString().padStart(2,'0')} / 04</span></button><span>${t("OINJA · 电涌 ")}<b>${t("本地原型")}</b></span></footer>
+      <footer class="su-menu-footer"><button data-act="archive">${t("行动档案 ")}<span>${this.profile.unlocks.length.toString().padStart(2,'0')} / 04</span></button><span>${t("OINJA · 电涌 ")}<b>${t("浏览器游戏")}</b></span></footer>
       <div class="su-narrow-notice">${t("请在桌面浏览器使用键盘游玩；放大窗口可获得更完整的战场视野。")}</div>
     </main>`, focus);
   }

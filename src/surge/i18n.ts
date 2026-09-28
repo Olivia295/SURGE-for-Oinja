@@ -5,15 +5,21 @@ export type Locale = 'zh-CN' | 'en';
 const KEY = 'oinja-surge-locale';
 let locale: Locale | undefined;
 export function getLocale(): Locale {
-  if (!locale) { try { locale = localStorage.getItem(KEY) === 'en' ? 'en' : 'zh-CN'; } catch { locale = 'zh-CN'; } }
-  return locale;
+  if (locale) return locale;
+  try {
+    const saved = localStorage.getItem(KEY);
+    if (saved === 'en' || saved === 'zh-CN') return locale = saved;
+  } catch { /* Use the browser preference when storage is unavailable. */ }
+  const languages = typeof navigator === 'undefined' ? [] : navigator.languages?.length ? navigator.languages : [navigator.language];
+  const preferred = languages.find(language => /^(zh|en)(-|$)/i.test(language));
+  return locale = preferred && /^zh(-|$)/i.test(preferred) ? 'zh-CN' : 'en';
 }
-export function setLocale(next: Locale): void {
+export function setLocale(next: Locale, persist = true): void {
   locale = next;
-  try { localStorage.setItem(KEY, next); } catch { /* Play remains available when storage is blocked. */ }
+  if (persist) try { localStorage.setItem(KEY, next); } catch { /* Play remains available when storage is blocked. */ }
   if (typeof document !== 'undefined') {
     document.documentElement.lang = next;
-    document.title = next === 'en' ? 'Oinja · Surge' : 'Oinja · 电涌';
+    document.title = next === 'en' ? 'SURGE for Oinja' : 'Oinja · 电涌 SURGE';
     document.querySelector('canvas')?.setAttribute('aria-label', next === 'en' ? 'Third-person survival game' : '第三人称生存游戏画面');
   }
 }

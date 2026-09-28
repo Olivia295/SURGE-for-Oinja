@@ -11,7 +11,7 @@ archive/
 docs/
 tests/
 tools/
-README.md
+README*.md
 开始游戏.command
 *.log
 .DS_Store
