@@ -17,7 +17,7 @@
 Start with any of **eight abilities**. Fill **four ability slots**, add an independent **support companion or weapon**, and turn individual attacks into a connected build.
 
 - **Abilities that work together.** Pull enemies into Shock Fist, discharge conductive marks with explosions, or use Chain Lightning to energize Volt Mist. Five automatic links change how paired abilities behave.
-- **Choices that change the run.** Two evolution branches per ability, 14 upgrade types, rerolls, and replacements that inherit your investment.
+- **Choices that change the run.** Two evolution branches per ability, 14 mods, rerolls, and replacements that inherit your investment.
 - **A short survival arc.** Five enemy types, elite encounters, and a boss at 12 minutes. Defeat it before the 15-minute limit. Standard difficulty includes one emergency revival; Danger I and II offer more pressure.
 - **Power beyond your four slots.** Map facilities can unlock support such as Workshop Titan, Critical Tempest, and Orbital Cannon.
 
@@ -30,7 +30,7 @@ Attacks fire automatically. Your job is to move, dodge, shape the crowd, choose 
 | Alleys, cargo yards, shopfronts, ramps, and passages beneath raised walkways. | Conservatories, water gardens, observation instruments, and an elevated ring connected by broad ramps. |
 | Restore power, open shortcuts, and turn industrial equipment against the swarm. | Circle the courtyards, travel between levels, and use the open routes to gather enemies. |
 
-Each map has **12 facility locations**, with one of each of six facility types selected per run. Repair stations, escort carts, hoists, conveyors, and guarded caches give you reasons to leave your usual route.
+Each map has **12 facility locations**, with one of each of six facility types selected per run. Repair stations, power relays, escort carts, hoists, conveyors, and guarded caches give you reasons to leave your usual route.
 
 ![Tidal Observatory gameplay with a support unit](docs/images/observatory.jpg)
 
