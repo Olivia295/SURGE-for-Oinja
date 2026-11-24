@@ -5,7 +5,7 @@ import bpy, math, json, random, hashlib
 from pathlib import Path
 from mathutils import Vector, Matrix
 from math import sin, cos, pi
-ROOT=Path('/Users/oliviapan/Desktop/Oinja-game')
+ROOT=Path(__file__).resolve().parents[2]
 SOURCE=ROOT/'art/source/characters/reference_highpoly.blend'
 random.seed(41)
 REPORT=[]

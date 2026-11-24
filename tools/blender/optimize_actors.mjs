@@ -4,7 +4,8 @@ import {dedup,prune,weld,resample} from '@gltf-transform/functions';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-const root='/Users/oliviapan/Desktop/Oinja-game';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const io=new NodeIO().registerExtensions(ALL_EXTENSIONS);
 const records=[];
 for(const group of ['characters','enemies']){

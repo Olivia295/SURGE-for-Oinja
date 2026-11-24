@@ -2,7 +2,9 @@ import fs from 'node:fs/promises';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {clone} from 'three/addons/utils/SkeletonUtils.js';
 import {AnimationMixer,Box3,Vector3} from 'three';
-const root='/Users/oliviapan/Desktop/Oinja-game';const files=['characters/oinja','characters/oinja_lod1','enemies/crawler','enemies/rammer','enemies/gunner','enemies/bulwark','enemies/weaver'];const result=[];
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');const files=['characters/oinja','characters/oinja_lod1','enemies/crawler','enemies/rammer','enemies/gunner','enemies/bulwark','enemies/weaver'];const result=[];
 for(const file of files){
  const data=await fs.readFile(root+'/public/assets/'+file+'.glb');const asset=await new GLTFLoader().parseAsync(data.buffer.slice(data.byteOffset,data.byteOffset+data.byteLength),'');const scene=clone(asset.scene);const mixer=new AnimationMixer(scene);scene.updateMatrixWorld(true);const box=new Box3().setFromObject(scene);const checks=[];
  for(const clip of asset.animations){mixer.stopAllAction();const action=mixer.clipAction(clip).reset().play();

@@ -12,7 +12,7 @@
 
 ## 文件位置
 
-所有项目开发文件在 /Users/oliviapan/Desktop/Oinja-game。源码、模型源文件、脚本、生成资产、截图、日志、测试报告和构建输出不写到 Oinja 或 Oinja-website。
+所有项目开发文件在本仓库（Oinja-game）内。源码、模型源文件、脚本、生成资产、截图、日志、测试报告和构建输出不写到 Oinja 或 Oinja-website。
 
 实施时按需建立：
 

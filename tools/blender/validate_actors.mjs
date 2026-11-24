@@ -1,7 +1,8 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import validator from 'gltf-validator';
-const root='/Users/oliviapan/Desktop/Oinja-game';const results=[];
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');const results=[];
 for(const group of ['characters','enemies'])for(const file of await fs.readdir(path.join(root,'public/assets',group))){
  if(!file.endsWith('.glb'))continue;const data=await fs.readFile(path.join(root,'public/assets',group,file));
  const result=await validator.validateBytes(new Uint8Array(data),{uri:file,maxIssues:100});results.push({file:group+'/'+file,issues:result.issues,info:result.info});
